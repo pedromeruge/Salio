@@ -49,6 +49,7 @@ public class PlayerConstraintController : MonoBehaviour
         if (arenaMarker == null || playerMarker == null)
             return;
 
+        // # Position logic:
         // compute player position in arena local coordinate system
         Vector3 localPos = arenaMarker.InverseTransformPoint(playerMarker.position);
 
@@ -58,7 +59,6 @@ public class PlayerConstraintController : MonoBehaviour
         localPos.x = Mathf.Clamp(localPos.x, -halfX + playerAreaCenter.x, halfX + playerAreaCenter.x);
         localPos.z = Mathf.Clamp(localPos.z, -halfZ + playerAreaCenter.y, halfZ + playerAreaCenter.y);
 
-        // # Position logic:
         // lock y position, to always be at same height in relation to arena, instead of independent y position for player and arena
         localPos.y = 0.0f; // NOTE: can increase this to make player float above arena
 
@@ -80,7 +80,7 @@ public class PlayerConstraintController : MonoBehaviour
         Vector3 localEuler = localRotation.eulerAngles;
         Quaternion localYRotation = Quaternion.Euler(0f, localEuler.y, 0f);
 
-        // combine: arena full rotation + player y rotation relative to arena
+        // combine: arena full rotation (tilt/roll) + player y rotation relative to arena
         Quaternion targetRotation = arenaMarker.rotation * localYRotation;
         
         // Smooth rotation
