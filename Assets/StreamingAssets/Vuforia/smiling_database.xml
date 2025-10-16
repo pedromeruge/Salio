@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="invizimals" size="1.000000 0.661765" />
+    <ImageTarget name="pim_smiling_friends" size="1.000000 1.625000" />
+    <ImageTarget name="glep_smiling_friends" size="1.000000 1.333333" />
+    <ImageTarget name="gwimbly-smiling-friends" size="1.000000 1.379630" />
+  </Tracking>
+</QCARConfig>
