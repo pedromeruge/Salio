@@ -14,6 +14,9 @@ public class PlayerConstraintController : MonoBehaviour
     [Range(0f, 20f)]
     [SerializeField] private float smoothSpeed = 8f;    // Higher = snappier movement, 0 = teleport
 
+    [Header("Position")]
+    [Tooltip("Y position of player relative to arena")]
+    [SerializeField] private float yPosition = 0f; // Lock Y position to arena height
     private Vector3 smoothedPos;
     private Quaternion smoothedRot;
 
@@ -60,7 +63,7 @@ public class PlayerConstraintController : MonoBehaviour
         localPos.z = Mathf.Clamp(localPos.z, -halfZ + playerAreaCenter.y, halfZ + playerAreaCenter.y);
 
         // lock y position, to always be at same height in relation to arena, instead of independent y position for player and arena
-        localPos.y = 0.0f; // NOTE: can increase this to make player float above arena
+        localPos.y = yPosition; // NOTE: can increase this to make player float above arena
 
         // convert back to world space
         Vector3 clampedWorldPos = arenaMarker.TransformPoint(localPos);

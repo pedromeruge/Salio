@@ -656,6 +656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 972170838}
+  - component: {fileID: 972170839}
   m_Layer: 8
   m_Name: ArenaStructure
   m_TagString: Untagged
@@ -684,6 +685,25 @@ Transform:
   - {fileID: 1226122957}
   m_Father: {fileID: 714370378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &972170839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972170837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959b76de9e6d64a598b43c7e8825b04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  positionSmoothSpeed: 8
+  rotationSmoothSpeed: 8
+  horizontalDeadzone: 0.1
+  verticalDeadzone: 0.01
+  rotationDeadzone: 3
+  vuforiaTrackedObject: {fileID: 714370378}
+  smoothedObject: {fileID: 972170838}
 --- !u!1 &1081770724
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +873,7 @@ MonoBehaviour:
   playerMarker: {fileID: 1363380551}
   playerAreaBoundary: {fileID: 1226122957}
   smoothSpeed: 10
+  yPosition: 0
 --- !u!1 &1110779125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,7 +1179,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.01, z: -3.3}
-  m_LocalScale: {x: 1, y: 1, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 972170838}
@@ -1847,6 +1868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2077602080}
+  - component: {fileID: 2077602081}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -1870,6 +1892,25 @@ Transform:
   - {fileID: 1758016029}
   m_Father: {fileID: 714370378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2077602081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077602079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959b76de9e6d64a598b43c7e8825b04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  positionSmoothSpeed: 8
+  rotationSmoothSpeed: 8
+  horizontalDeadzone: 0.1
+  verticalDeadzone: 0.01
+  rotationDeadzone: 3
+  vuforiaTrackedObject: {fileID: 714370378}
+  smoothedObject: {fileID: 2077602080}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
