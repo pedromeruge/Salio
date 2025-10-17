@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="spongebob_small" size="0.100000 0.093125" />
+    <ImageTarget name="smiling_friends_small" size="0.100000 0.100000" />
+    <ImageTarget name="rick_and_morty_small" size="0.100000 0.100629" />
+    <ImageTarget name="smiling_friends" size="1.000000 1.000000" />
+    <ImageTarget name="rick_and_morty" size="1.000000 1.004651" />
+    <ImageTarget name="spongebob" size="1.000000 0.933333" />
+  </Tracking>
+</QCARConfig>
