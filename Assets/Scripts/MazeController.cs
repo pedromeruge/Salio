@@ -7,6 +7,7 @@ public class MazeController : MonoBehaviour
     [Header("Maze Setup")]
     public Transform spawnPoint;
     public BallController ball;
+    public AnchorGravityScript gravityAnchor;
 
     [Header("Stability Settings")]
     [SerializeField] private float stabilityDuration = 0.3f;
@@ -32,7 +33,7 @@ public class MazeController : MonoBehaviour
     public void FixedUpdate()
     {
         // prevent ball going outside bounds
-        if (Mathf.Abs(transform.position.y - transform.position.y) > outOfBoundsYThreshold)
+        if (Mathf.Abs(transform.position.y - ball.transform.position.y) > outOfBoundsYThreshold)
         {
             // reset ball to spawn point above maze
             Debug.Log("Ball out of bounds, resetting to spawn point");
@@ -138,6 +139,8 @@ public class MazeController : MonoBehaviour
 
         //  associate ball with maze
         ball.mazeTransform = transform;
+        ball.gravityAnchor = gravityAnchor;
+        
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         rb.isKinematic = true;
 
