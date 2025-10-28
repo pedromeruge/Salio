@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void OnGoalReached()
     {
+        // add logic to only consider level ended when all balls have reached their respective goal (in levels where that happens)
         endLevel();
     }
 }
