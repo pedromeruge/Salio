@@ -39,7 +39,7 @@ public class MagnetAnchor : MonoBehaviour
     {
         if (hideGizmos) return;
         // Visualize magnet range in editor
-        Gizmos.color = (polarity == Polarity.Attract) ? Color.green : Color.red;
+        Gizmos.color = (polarity == Polarity.Attract) ? Color.blue : Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
         Gizmos.DrawRay(transform.position, transform.forward * 0.5f);
     }

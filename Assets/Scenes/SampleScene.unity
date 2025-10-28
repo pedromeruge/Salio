@@ -550,9 +550,9 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: marker_2
+  mTrackableName: smiling_friends
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/image_target.xml
+  mDataSetPath: Vuforia/series_database.xml
   mAspectRatio: 1
   mImageTargetType: 0
   mWidth: 1
@@ -593,8 +593,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 714370377}
   mHiddenRoot: {fileID: 0}
-  mTargetName: marker_2
-  mDatasetName: Vuforia/image_target.xml
+  mTargetName: smiling_friends
+  mDatasetName: Vuforia/series_database.xml
   mCastedBehaviour: {fileID: 714370377}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
@@ -1451,13 +1451,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: marker_1
+  mTrackableName: rick_and_morty
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/image_target.xml
-  mAspectRatio: 1
+  mDataSetPath: Vuforia/series_database.xml
+  mAspectRatio: 1.004651
   mImageTargetType: 0
   mWidth: 1
-  mHeight: 1
+  mHeight: 1.004651
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -1493,8 +1493,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 1363380550}
   mHiddenRoot: {fileID: 0}
-  mTargetName: marker_1
-  mDatasetName: Vuforia/image_target.xml
+  mTargetName: rick_and_morty
+  mDatasetName: Vuforia/series_database.xml
   mCastedBehaviour: {fileID: 1363380550}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
