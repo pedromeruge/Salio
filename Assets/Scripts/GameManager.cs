@@ -1,16 +1,32 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [Header("References")]
+    public GameObject ball;
+    public GameObject goal;
+    public Text messageText;
+    public Text timerText;
+
+    [Header("Messages")]
+    [TextArea] public string startMessage = "Level Start!";
+    [TextArea] public string endMessage = "Level Complete!";
+
+    [Header("Settings")]
+    public float messageDisplayTime = 3f;
+
     public bool IsGamePaused { get; private set; } = false;
     public short currentLevel = 1;
 
+    private bool levelRunning = false;
+    private float levelTimer = 0f;
 
-    void Awake()
+    private void Awake()
     {
-        //singleton
         if (Instance == null)
         {
             Instance = this;
@@ -19,18 +35,84 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
+        }
+
+        if (messageText != null)
+            messageText.gameObject.SetActive(false);
+
+        if (timerText != null)
+        {
+            timerText.text = "0";
+            timerText.gameObject.SetActive(true);
+        }
+
+        startLevel();
+    }
+
+    private void Update()
+    {
+        if (levelRunning)
+        {
+            levelTimer += Time.deltaTime;
+
+            if (timerText != null)
+            {
+                int displaySeconds = Mathf.FloorToInt(levelTimer);
+                timerText.text = displaySeconds.ToString();
+            }
         }
     }
 
     public void startLevel()
     {
-        // add stuff
+        StartCoroutine(LevelStartRoutine());
     }
-    
+
+    private IEnumerator LevelStartRoutine()
+    {
+        levelTimer = 0f;
+        levelRunning = false;
+
+        yield return ShowMessage(startMessage);
+
+        levelRunning = true;
+    }
+
     public void endLevel()
     {
-        Debug.Log("Level " + currentLevel + " completed!");
+        if (!levelRunning) return;
+
+        levelRunning = false;
+        Debug.Log("Level " + currentLevel + " completed in " + Mathf.FloorToInt(levelTimer) + " seconds!");
         currentLevel++;
-        // add stuff
+
+        StartCoroutine(LevelEndRoutine());
+    }
+
+    private IEnumerator LevelEndRoutine()
+    {
+        yield return ShowMessage(endMessage);
+        startLevel();
+    }
+
+    private IEnumerator ShowMessage(string message)
+    {
+        if (messageText == null)
+        {
+            Debug.LogWarning("Message Text UI not assigned!");
+            yield break;
+        }
+
+        messageText.text = message;
+        messageText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(messageDisplayTime);
+        messageText.gameObject.SetActive(false);
+    }
+
+    public void OnGoalReached()
+    {
+        endLevel();
     }
 }
+
