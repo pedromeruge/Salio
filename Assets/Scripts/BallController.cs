@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -5,20 +6,22 @@ public class BallController : MonoBehaviour
 {
 
     public Transform mazeTransform; // maze marker
-    public AnchorGravityScript gravityAnchor; // anchor that controls gravity direction
 
-    [Header("Gravity Settings")]
+    [Header("Gravity Settings (maze)")]
     [SerializeField] private float gravityMagnitude = 5.0f;
     [SerializeField] private float gravitySmoothness = 5.0f;
-    [SerializeField] private bool useGravityAnchor = true;
 
+    [Header("Magnet Settings")]
+    [SerializeField] private LayerMask magnetLayerMask = -1; // which layers contain magnets, by default all
+
+    
     private Rigidbody rb;
     private Vector3 currentGravity;
+    [SerializeField] private MagnetAnchor[] influencingMagnets ; // magnets that affect the ball
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
 
         // force properties, if not done in editor
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
@@ -30,24 +33,9 @@ public class BallController : MonoBehaviour
         if (mazeTransform == null || rb.isKinematic) return;
 
         // calculate gravity direction based on maze orientation
-        Vector3 targetGravity;
-
-        if (gravityAnchor != null && gravityAnchor.IsTracking)
-        {
-            targetGravity = CalculateGravityFromAnchor();
-        }
-        else if (!useGravityAnchor)
-        {
-            // maze-based gravity
-            targetGravity = -mazeTransform.up * gravityMagnitude;
-
-        }
-        else
-        {
-            // No gravity if anchor is required but not tracking
-            targetGravity = Vector3.zero;
-        }
-
+        Vector3 mazeGravity = -mazeTransform.up * gravityMagnitude;
+        Vector3 magnetsGravity = CalculateMagneticForces();
+        Vector3 targetGravity = mazeGravity + magnetsGravity;
         // Smooth transition to avoid jittering
         currentGravity = Vector3.Lerp(currentGravity, targetGravity, Time.fixedDeltaTime * gravitySmoothness);
 
@@ -55,31 +43,55 @@ public class BallController : MonoBehaviour
         rb.AddForce(currentGravity, ForceMode.Acceleration);
     }
 
-    // calculate gravity vector based on anchor position
-    private Vector3 CalculateGravityFromAnchor()
+    // New: Calculate and apply summed forces from all tracked magnets
+    private Vector3 CalculateMagneticForces()
     {
-        // get anchor position relative to maze center in maze's local space
-        Vector3 anchorLocalPos = mazeTransform.InverseTransformPoint(gravityAnchor.transform.position);
+        Vector3 totalMagnetForce = Vector3.zero;
 
-        // project onto XZ plane (ignore Y, keep it on maze surface)
-        Vector2 anchorDirection2D = new Vector2(anchorLocalPos.x, anchorLocalPos.z);
-
-        // if anchor is at center, use default maze gravity
-        if (anchorDirection2D.sqrMagnitude < 0.001f)
+        // if no magnets assigned, fallback to maze gravity
+        if (influencingMagnets == null || influencingMagnets.Length == 0)
         {
-            return -mazeTransform.up * gravityMagnitude;
+            Debug.Log("No influencing magnets assigned to ball");
+            totalMagnetForce = -mazeTransform.up * gravityMagnitude; // fallback to maze gravity
         }
 
-        // normalize to get direction
-        anchorDirection2D.Normalize();
+        foreach (MagnetAnchor magnet in influencingMagnets)
+        {
+            if (!magnet.isTracking) continue; // if magnet not currently tracked, ignore
 
-        // convert back to 3D local space (on the XZ plane)
-        Vector3 localGravityDirection = new Vector3(anchorDirection2D.x, 0f, anchorDirection2D.y);
+            // filter only valid layers
+            if (!checkLayerInMask(magnetLayerMask, magnet.gameObject.layer)) continue;
 
-        // transform to world space and apply magnitude
-        Vector3 worldGravityDirection = mazeTransform.TransformDirection(localGravityDirection);
+            float dist = Vector3.Distance(transform.position, magnet.transform.position);
+            if (dist > magnet.range || dist < 0.01f) continue; // skip magnets out-of-range or too close
 
-        return worldGravityDirection * gravityMagnitude;
+            Debug.Log("Magnet influencing ball: " + magnet.name + " at distance " + dist);
+            // direction: from ball to magnet (for attract) or opposite (repel)
+            Vector3 direction = (magnet.transform.position - transform.position).normalized;
+            if (magnet.polarity == Polarity.Repel)
+            {
+                direction = -direction;
+            }
+
+            // distance falloff
+            float forceMagnitude = magnet.strength / Mathf.Pow(dist, magnet.falloff);
+
+            Vector3 force = direction * forceMagnitude;
+
+            // project force to maze plane (XZ relative to maze, ignore Y for surface play)
+            if (mazeTransform != null)
+            {
+                Vector3 localForce = mazeTransform.InverseTransformDirection(force);
+                localForce.y = 0f; // flatten to plane domain
+                force = mazeTransform.TransformDirection(localForce);
+            }
+
+            totalMagnetForce += force;
+        }
+
+        Debug.Log($"Applied magnet force to ball: {totalMagnetForce} (from {influencingMagnets.Count(m => m.isTracking)} magnets)");
+
+        return totalMagnetForce;
     }
 
     // function called to reset ball local position and velocity
@@ -98,7 +110,7 @@ public class BallController : MonoBehaviour
 
         // Reset gravity smoothing
         currentGravity = Vector3.zero;
-        
+
         // force physics to sync
         Physics.SyncTransforms();
 
@@ -106,7 +118,7 @@ public class BallController : MonoBehaviour
         Debug.Log($"Ball actual position: {transform.position}");
         Debug.Log($"Ball local position: {transform.localPosition}");
     }
-    
+
     // draw gravity direction
     private void OnDrawGizmos()
     {
@@ -115,5 +127,11 @@ public class BallController : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawRay(transform.position, currentGravity.normalized * 0.1f);
         }
+    }
+    
+    // check if a layer is in a layermask
+    bool checkLayerInMask (LayerMask mask, int layer)
+    {
+        return mask == (mask | (1 << layer));
     }
 }

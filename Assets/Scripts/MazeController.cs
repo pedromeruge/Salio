@@ -7,7 +7,6 @@ public class MazeController : MonoBehaviour
     [Header("Maze Setup")]
     public Transform spawnPoint;
     public BallController ball;
-    public AnchorGravityScript gravityAnchor;
 
     [Header("Stability Settings")]
     [SerializeField] private float stabilityDuration = 0.3f;
@@ -138,8 +137,8 @@ public class MazeController : MonoBehaviour
         }
 
         //  associate ball with maze
+        // should be here or in ball side?
         ball.mazeTransform = transform;
-        ball.gravityAnchor = gravityAnchor;
         
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         rb.isKinematic = true;
