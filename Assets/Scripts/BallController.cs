@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
 
-    public Transform mazeTransform; // maze marker
+    [SerializeField] private Transform mazeTransform; // maze marker
 
     [Header("Gravity Settings (maze)")]
     [SerializeField] private float gravityMagnitude = 5.0f;

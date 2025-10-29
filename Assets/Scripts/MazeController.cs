@@ -135,10 +135,6 @@ public class MazeController : MonoBehaviour
             Debug.LogWarning("Ball or SpawnPoint is null!");
             yield break;
         }
-
-        //  associate ball with maze
-        // should be here or in ball side?
-        ball.mazeTransform = transform;
         
         Rigidbody rb = ball.GetComponent<Rigidbody>();
         rb.isKinematic = true;

@@ -740,6 +740,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -814,12 +815,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1012765002}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -865,6 +866,25 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959b76de9e6d64a598b43c7e8825b04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectSmoothing
+  positionAlpha: 0.2
+  rotationAlpha: 0.2
+  horizontalDeadzone: 0.002
+  verticalDeadzone: 0.001
+  rotationDeadzone: 0.5
+  ghostTrackedObject: {fileID: 1110779131}
+  hideWhenNotTracking: 0
 --- !u!1 &348979516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,13 +1088,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1891,6 +1911,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 972170839}
+        m_TargetAssemblyTypeName: ObjectSmoothing, Assembly-CSharp
+        m_MethodName: onTrackingFound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
       m_Calls:
@@ -1921,6 +1953,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1390380660}
         m_TargetAssemblyTypeName: MagnetAnchor, Assembly-CSharp
         m_MethodName: OnTrackingLost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 972170839}
+        m_TargetAssemblyTypeName: ObjectSmoothing, Assembly-CSharp
+        m_MethodName: onTrackingLost
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1966,12 +2010,11 @@ Transform:
   m_GameObject: {fileID: 714370375}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 972170838}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 1336460202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &714370379
 MonoBehaviour:
@@ -2039,13 +2082,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719325100}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1504655965}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 1561922477}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &719325103
 MonoBehaviour:
@@ -2143,6 +2185,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1504655967}
+        m_TargetAssemblyTypeName: ObjectSmoothing, Assembly-CSharp
+        m_MethodName: onTrackingFound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
       m_Calls:
@@ -2173,6 +2227,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1337837091}
         m_TargetAssemblyTypeName: MagnetAnchor, Assembly-CSharp
         m_MethodName: OnTrackingLost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1504655967}
+        m_TargetAssemblyTypeName: ObjectSmoothing, Assembly-CSharp
+        m_MethodName: onTrackingLost
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2918,7 +2984,7 @@ Transform:
   - {fileID: 673588431}
   - {fileID: 1758016029}
   - {fileID: 960060687}
-  m_Father: {fileID: 714370378}
+  m_Father: {fileID: 1336460202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &972170839
 MonoBehaviour:
@@ -2932,13 +2998,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959b76de9e6d64a598b43c7e8825b04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  positionSmoothSpeed: 8
-  rotationSmoothSpeed: 8
-  horizontalDeadzone: 0.1
+  positionAlpha: 0.5
+  rotationAlpha: 0.5
+  horizontalDeadzone: 0.05
   verticalDeadzone: 0.01
-  rotationDeadzone: 3
-  vuforiaTrackedObject: {fileID: 714370378}
-  smoothedObject: {fileID: 972170838}
+  rotationDeadzone: 1
+  ghostTrackedObject: {fileID: 714370378}
+  hideWhenNotTracking: 1
 --- !u!114 &972170840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2952,6 +3018,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   vectorHeight: 0.5
+--- !u!1 &1012765001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012765002}
+  m_Layer: 0
+  m_Name: Cameras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012765002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012765001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1110779131}
+  - {fileID: 330585546}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1040315824
 GameObject:
   m_ObjectHideFlags: 0
@@ -3152,7 +3251,7 @@ MonoBehaviour:
   m_Script: {fileID: -1826476478, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.VuforiaBehaviour
-  mWorldCenterMode: 2
+  mWorldCenterMode: 1
   mWorldCenter: {fileID: 0}
 --- !u!81 &1110779129
 AudioListener:
@@ -3169,7 +3268,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110779125}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -3221,12 +3320,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110779125}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1012765002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1197218021
 GameObject:
@@ -3494,6 +3593,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322047967}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1336460201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1336460202}
+  m_Layer: 0
+  m_Name: MazeMarker1Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1336460202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336460201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 714370378}
+  - {fileID: 972170838}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1337837090
 GameObject:
   m_ObjectHideFlags: 0
@@ -3909,7 +4041,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504655964}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
@@ -3917,7 +4049,7 @@ Transform:
   - {fileID: 1266339048}
   - {fileID: 2034031838}
   - {fileID: 895502674}
-  m_Father: {fileID: 719325101}
+  m_Father: {fileID: 1561922477}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1504655966
 MonoBehaviour:
@@ -3944,13 +4076,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959b76de9e6d64a598b43c7e8825b04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  positionSmoothSpeed: 8
-  rotationSmoothSpeed: 8
-  horizontalDeadzone: 0.1
+  positionAlpha: 0.5
+  rotationAlpha: 0.5
+  horizontalDeadzone: 0.05
   verticalDeadzone: 0.01
-  rotationDeadzone: 3
-  vuforiaTrackedObject: {fileID: 719325101}
-  smoothedObject: {fileID: 1504655965}
+  rotationDeadzone: 1
+  ghostTrackedObject: {fileID: 719325101}
+  hideWhenNotTracking: 1
+--- !u!1 &1561922476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1561922477}
+  m_Layer: 0
+  m_Name: MazeMarker2Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1561922477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561922476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 719325101}
+  - {fileID: 1504655965}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1631867641
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,7 +4919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6308c8058bb074ba7be54eaf63eaee77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  mazeTransform: {fileID: 714370378}
+  mazeTransform: {fileID: 673588431}
   gravityMagnitude: 4
   gravitySmoothness: 3
   magnetLayerMask:
@@ -5282,7 +5447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6308c8058bb074ba7be54eaf63eaee77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  mazeTransform: {fileID: 719325101}
+  mazeTransform: {fileID: 1266339048}
   gravityMagnitude: 4
   gravitySmoothness: 3
   magnetLayerMask:
@@ -5621,12 +5786,11 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 1110779131}
-  - {fileID: 714370378}
-  - {fileID: 719325101}
+  - {fileID: 1012765002}
+  - {fileID: 1336460202}
+  - {fileID: 1561922477}
   - {fileID: 692336669}
   - {fileID: 400817747}
   - {fileID: 267932061}
