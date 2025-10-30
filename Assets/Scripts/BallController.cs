@@ -114,9 +114,10 @@ public class BallController : MonoBehaviour
         rb.isKinematic = !enabled;
         render.enabled = enabled;
 
-        if (!enabled)
+        // if not kinematic, clear velocities to avoid carry-over
+        if (!rb.isKinematic)
         {
-            // Clear velocities when freezing
+            // clear velocities when freezing
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
