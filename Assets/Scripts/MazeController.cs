@@ -55,8 +55,8 @@ public class MazeController : MonoBehaviour
                 Rigidbody rb = ball.GetComponent<Rigidbody>();
                 if (rb != null && rb.isKinematic)
                 {
-                    rb.isKinematic = false;
-                    // restore velocities
+                    // restore velocities and show ball
+                    ball.SetPhysicsEnabled(true);
                     rb.linearVelocity = savedBallVelocity;
                     rb.angularVelocity = savedBallAngularVelocity;
                     Debug.Log("Tracking restored - ball unfrozen");
@@ -115,14 +115,13 @@ public class MazeController : MonoBehaviour
                 savedBallAngularVelocity = rb.angularVelocity;
 
                 // freeze the ball
-                rb.isKinematic = true;
+                ball.SetPhysicsEnabled(false);
                 Debug.Log("Tracking lost - ball frozen");
             }
         }
 
         // notify manager
         ARGameManager.Instance.OnMazeTrackingChanged(this, false);
-
         flickerProtectionCoroutine = null;
 
     }
@@ -136,9 +135,7 @@ public class MazeController : MonoBehaviour
             yield break;
         }
         
-        Rigidbody rb = ball.GetComponent<Rigidbody>();
-        rb.isKinematic = true;
-
+        ball.SetPhysicsEnabled(false); // hide and freeze ball until stable
         Debug.Log("Waiting for marker stability...");
 
         Vector3 lastPosition = transform.position;
@@ -180,7 +177,6 @@ public class MazeController : MonoBehaviour
         // marker is stable, spawn ball
         Debug.Log("Marker stable! Spawning ball...");
         ball.ResetToSpawn(spawnPoint.position);
-        Debug.Log("Ball spawned at: " + spawnPoint.position);
         ballSpawned = true;
 
         // wait multiple frames for physics to fully settle
@@ -190,11 +186,7 @@ public class MazeController : MonoBehaviour
         }
 
         // enable physics
-        rb.isKinematic = false;
-
-        // clear any accumulated velocities that might have built up
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        ball.SetPhysicsEnabled(true);
 
         Debug.Log("Ball physics enabled");
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -14,14 +15,27 @@ public class BallController : MonoBehaviour
     [Header("Magnet Settings")]
     [SerializeField] private LayerMask magnetLayerMask = -1; // which layers contain magnets, by default all
 
+
+    [Header("Debug")]
+    [SerializeField] private bool debugLogs = false;
     
     private Rigidbody rb;
+    private Renderer render;
     private Vector3 currentGravity;
     [SerializeField] private MagnetAnchor[] influencingMagnets ; // magnets that affect the ball
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        render = GetComponent<Renderer>();
+        if (render == null)
+        {
+            Debug.LogError("BallController: No Renderer found on ball!", this);
+        }
+    }
+    void Start()
+    {
+        SetPhysicsEnabled(false); // start hidden and frozen until maze tracking found
 
         // force properties, if not done in editor
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
@@ -51,7 +65,7 @@ public class BallController : MonoBehaviour
         // if no magnets assigned, fallback to maze gravity
         if (influencingMagnets == null || influencingMagnets.Length == 0)
         {
-            Debug.Log("No influencing magnets assigned to ball");
+            if (debugLogs) Debug.Log("No influencing magnets assigned to ball");
             totalMagnetForce = -mazeTransform.up * gravityMagnitude; // fallback to maze gravity
         }
 
@@ -65,7 +79,7 @@ public class BallController : MonoBehaviour
             float dist = Vector3.Distance(transform.position, magnet.transform.position);
             if (dist > magnet.range || dist < 0.01f) continue; // skip magnets out-of-range or too close
 
-            Debug.Log("Magnet influencing ball: " + magnet.name + " at distance " + dist);
+            if (debugLogs) Debug.Log("Magnet influencing ball: " + magnet.name + " at distance " + dist);
             // direction: from ball to magnet (for attract) or opposite (repel)
             Vector3 direction = (magnet.transform.position - transform.position).normalized;
             if (magnet.polarity == Polarity.Repel)
@@ -89,11 +103,27 @@ public class BallController : MonoBehaviour
             totalMagnetForce += force;
         }
 
-        Debug.Log($"Applied magnet force to ball: {totalMagnetForce} (from {influencingMagnets.Count(m => m.isTracking)} magnets)");
+        if (debugLogs) Debug.Log($"Applied magnet force to ball: {totalMagnetForce} (from {influencingMagnets.Count(m => m.isTracking)} magnets)");
 
         return totalMagnetForce;
     }
 
+    // enable ball physics and visibility
+    public void SetPhysicsEnabled(bool enabled)
+    {
+        rb.isKinematic = !enabled;
+        render.enabled = enabled;
+
+        if (!enabled)
+        {
+            // Clear velocities when freezing
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        if (debugLogs) Debug.Log($"[BallController] Physics {(enabled ? "enabled" : "disabled")}, visible: {enabled}");
+    }
+    
     // function called to reset ball local position and velocity
     public void ResetToSpawn(Vector3 spawnWorldPosition)
     {
@@ -114,9 +144,9 @@ public class BallController : MonoBehaviour
         // force physics to sync
         Physics.SyncTransforms();
 
-        Debug.Log($"Ball reset to world position: {spawnWorldPosition}");
-        Debug.Log($"Ball actual position: {transform.position}");
-        Debug.Log($"Ball local position: {transform.localPosition}");
+        if (debugLogs) Debug.Log($"Ball reset to world position: {spawnWorldPosition}");
+        if (debugLogs) Debug.Log($"Ball actual position: {transform.position}");
+        if (debugLogs) Debug.Log($"Ball local position: {transform.localPosition}");
     }
 
     // draw gravity direction

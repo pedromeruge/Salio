@@ -25,14 +25,19 @@ public class ObjectSmoothing : MonoBehaviour
     [Header("Visibility")]
     [SerializeField] private bool hideWhenNotTracking = true; // hide this object while not tracking the marker?
 
+    [Header("Debug")]
+    [SerializeField] private bool debugLogs = false;
+
     private Vector3 smoothedPosition;
     private Quaternion smoothedRotation;
     private bool isInitialized = false;
-    private Renderer[] renderers; // Cache all children renderers
+    private Renderer[] renderers; // cache all children renderers
 
     void Awake( )
     {
         renderers = GetComponentsInChildren<Renderer>();
+        // but if children is ball layer, ignore that render from list cause it will be handled separately
+        renderers = System.Array.FindAll(renderers, r => r.gameObject.tag != "Ball");
 
         // start hidden if hideWhenNotTracking is enabled
         if (hideWhenNotTracking)
@@ -71,14 +76,14 @@ public class ObjectSmoothing : MonoBehaviour
         float horizontalDelta = Vector2.Distance(currentXZ, rawXZ);
         float verticalDelta = Mathf.Abs(smoothedPosition.y - rawPosition.y);
 
-        Debug.Log($"Pos Delta - H:{horizontalDelta:F4}, V:{verticalDelta:F4}");
+        if (debugLogs)Debug.Log($"[{gameObject.name}] Pos Delta - H:{horizontalDelta:F4}, V:{verticalDelta:F4}");
 
         Vector3 newSmoothedPos = smoothedPosition;
 
         // check if we exceed deadzone in any axis
         if (horizontalDelta > horizontalDeadzone || verticalDelta > verticalDeadzone)
         {
-            Debug.Log("Exceeding position deadzone");
+            if (debugLogs) Debug.Log("Exceeding position deadzone");
             newSmoothedPos = Vector3.Lerp(smoothedPosition, rawPosition, positionAlpha);
         }
         smoothedPosition = newSmoothedPos;
@@ -86,11 +91,11 @@ public class ObjectSmoothing : MonoBehaviour
         // check if exceed rotation deadzone check
         float rotationDelta = Quaternion.Angle(smoothedRotation, rawRotation);
 
-        Debug.Log($"Rot Delta: {rotationDelta:F2}");
+        if (debugLogs) Debug.Log($"Rot Delta: {rotationDelta:F2}");
 
         if (rotationDelta > rotationDeadzone)
         {
-            Debug.Log("Exceeding rotation deadzone");
+            if (debugLogs) Debug.Log("Exceeding rotation deadzone");
             smoothedRotation = Quaternion.Slerp(smoothedRotation, rawRotation, rotationAlpha);
         }
 

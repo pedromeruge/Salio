@@ -15,7 +15,7 @@ public class MagnetAnchor : MonoBehaviour
     
     public bool isTracking { get; private set; } = false;
 
-    [Header("Debug Settings")]
+    [Header("Debug")]
     public bool hideGizmos = false;
 
     // ### NOTE: functions in below section should always be assigned to Vuforia "Default Observer Event Handler" script, which exists in the current object (if it is the marker gameObject) or nearest parent (if it is nested as child of the marker gameObject) ###
