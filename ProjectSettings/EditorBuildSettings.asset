@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 34d84531a9bef3b4286bca3894b0ba5b
+  - enabled: 1
+    path: Assets/Scenes/two_mazes.unity
+    guid: 785d109c9348e47fc813cd2921f50810
+  - enabled: 1
+    path: Assets/Scenes/single_maze.unity
+    guid: 0526ddeaae3a14f798bd9b6b4f778e3a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
