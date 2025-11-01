@@ -7,8 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("References")]
-    public GameObject ball;
-    public GameObject goal;
+
     public Text messageText;
     public Text timerText;
 

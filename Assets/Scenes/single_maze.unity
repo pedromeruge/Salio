@@ -5614,8 +5614,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30fc88a718be4ed0b83e73b7d04ca92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  ball: {fileID: 0}
-  goal: {fileID: 0}
   messageText: {fileID: 1503299651}
   timerText: {fileID: 2106310730}
   startMessage: Level Start!

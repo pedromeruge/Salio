@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Magnet
   - Ball
+  - Goal
   layers:
   - Default
   - TransparentFX

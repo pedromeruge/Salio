@@ -6,7 +6,7 @@ public class Goal : MonoBehaviour
     {
         if (GameManager.Instance == null) return;
 
-        if (other.gameObject == GameManager.Instance.ball)
+        if (other.gameObject.tag == "Ball")
         {
             GameManager.Instance.OnGoalReached();
         }
