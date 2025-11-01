@@ -96,6 +96,9 @@ public class GameManager : MonoBehaviour
     private IEnumerator LevelEndRoutine()
     {
         yield return ShowMessage(endMessage);
+
+        if (sceneToLoad == null) sceneToLoad = "MainMenu";
+
         StartCoroutine(Transition(sceneToLoad));
         //startLevel();
     }
