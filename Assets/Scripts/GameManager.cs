@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     private bool levelRunning = false;
     private float levelTimer = 0f;
+    [SerializeField] private string sceneToLoad;
+
 
     private void Awake()
     {
@@ -92,7 +96,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator LevelEndRoutine()
     {
         yield return ShowMessage(endMessage);
-        startLevel();
+        StartCoroutine(Transition(sceneToLoad));
+        //startLevel();
     }
 
     private IEnumerator ShowMessage(string message)
@@ -113,6 +118,20 @@ public class GameManager : MonoBehaviour
     {
         // add logic to only consider level ended when all balls have reached their respective goal (in levels where that happens)
         endLevel();
+    }
+
+    private IEnumerator Transition(string sceneName)
+    {
+
+        // wait for the new scene to be loaded
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName.ToLower(), LoadSceneMode.Single);
+        while (!loadOp.isDone) yield return null;
+
+    }
+
+    public void TransitionToScene(string sceneName)
+    {
+        StartCoroutine(Transition(sceneName));
     }
 }
 
