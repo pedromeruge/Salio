@@ -8,6 +8,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("single_maze");
     }
 
+    public void LevelSelect()
+    {
+        SceneManager.LoadScene("LevelSelect");
+    }
+    
     public void QuitGame()
     {
         Application.Quit();
