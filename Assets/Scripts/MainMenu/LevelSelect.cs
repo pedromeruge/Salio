@@ -4,24 +4,14 @@ using System.Collections;
 
 public class LevelSelect : MonoBehaviour
 {
-    [SerializeField] private string sceneToLoad;
-
     public void Back()
     {
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void TransitionToLevel()
+    public void TransitionToLevelEasy()
     {
-        StartCoroutine(Transition(sceneToLoad));
+        SceneManager.LoadSceneAsync("single_maze");
     }
 
-    private IEnumerator Transition(string sceneName)
-    {
-
-        // wait for the new scene to be loaded
-        AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName.ToLower(), LoadSceneMode.Single);
-        while (!loadOp.isDone) yield return null;
-
-    }
 }
