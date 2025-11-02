@@ -3,19 +3,18 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     [Header("References")]
-
     public Text messageText;
     public Text timerText;
 
     [Header("Messages")]
-    [TextArea] public string startMessage = "Level Start!";
-    [TextArea] public string endMessage = "Level Complete!";
+    [TextArea] public string startMessage = "Go!";
+    [TextArea] public string endMessage = "You Win!";
+    [TextArea] public string loseMessage = "Game Over!";
 
     [Header("Settings")]
     public float messageDisplayTime = 3f;
@@ -24,9 +23,9 @@ public class GameManager : MonoBehaviour
     public short currentLevel = 1;
 
     private bool levelRunning = false;
-    private float levelTimer = 0f;
+    private bool levelCompleted = false;
+    private float levelTimer = 60f;
     [SerializeField] private string sceneToLoad;
-
 
     private void Awake()
     {
@@ -46,7 +45,7 @@ public class GameManager : MonoBehaviour
 
         if (timerText != null)
         {
-            timerText.text = "0";
+            timerText.text = Mathf.CeilToInt(levelTimer).ToString();
             timerText.gameObject.SetActive(true);
         }
 
@@ -57,11 +56,20 @@ public class GameManager : MonoBehaviour
     {
         if (levelRunning)
         {
-            levelTimer += Time.deltaTime;
+            levelTimer -= Time.deltaTime;
+
+            if (levelTimer <= 0f)
+            {
+                levelTimer = 0f;
+                levelRunning = false;
+
+                if (!levelCompleted)
+                    StartCoroutine(LevelLoseRoutine());
+            }
 
             if (timerText != null)
             {
-                int displaySeconds = Mathf.FloorToInt(levelTimer);
+                int displaySeconds = Mathf.CeilToInt(levelTimer);
                 timerText.text = displaySeconds.ToString();
             }
         }
@@ -74,7 +82,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LevelStartRoutine()
     {
-        levelTimer = 0f;
+        levelTimer = 60f;
+        levelCompleted = false;
         levelRunning = false;
 
         yield return ShowMessage(startMessage);
@@ -87,7 +96,9 @@ public class GameManager : MonoBehaviour
         if (!levelRunning) return;
 
         levelRunning = false;
-        Debug.Log("Level " + currentLevel + " completed in " + Mathf.FloorToInt(levelTimer) + " seconds!");
+        levelCompleted = true;
+
+        Debug.Log("Level " + currentLevel + " completed in " + Mathf.FloorToInt(60f - levelTimer) + " seconds!");
         currentLevel++;
 
         StartCoroutine(LevelEndRoutine());
@@ -100,7 +111,15 @@ public class GameManager : MonoBehaviour
         if (sceneToLoad == null) sceneToLoad = "MainMenu";
 
         StartCoroutine(Transition(sceneToLoad));
-        //startLevel();
+    }
+
+    private IEnumerator LevelLoseRoutine()
+    {
+        Debug.Log("Level failed! Timer reached zero.");
+        yield return ShowMessage(loseMessage);
+
+        if (sceneToLoad == null) sceneToLoad = "MainMenu";
+        StartCoroutine(Transition(sceneToLoad));
     }
 
     private IEnumerator ShowMessage(string message)
@@ -119,17 +138,14 @@ public class GameManager : MonoBehaviour
 
     public void OnGoalReached()
     {
-        // add logic to only consider level ended when all balls have reached their respective goal (in levels where that happens)
-        endLevel();
+        if (!levelCompleted) // avoid triggering end multiple times
+            endLevel();
     }
 
     private IEnumerator Transition(string sceneName)
     {
-
-        // wait for the new scene to be loaded
         AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName.ToLower(), LoadSceneMode.Single);
         while (!loadOp.isDone) yield return null;
-
     }
 
     public void TransitionToScene(string sceneName)
@@ -137,4 +153,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Transition(sceneName));
     }
 }
+
+
 
