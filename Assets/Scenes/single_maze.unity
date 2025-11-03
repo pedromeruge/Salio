@@ -3187,13 +3187,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: rick_and_morty
+  mTrackableName: spongebob
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/series_database.xml
-  mAspectRatio: 1.004651
+  mAspectRatio: 0.933333
   mImageTargetType: 0
   mWidth: 1
-  mHeight: 1.004651
+  mHeight: 0.933333
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -3248,7 +3248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 714370377}
   mHiddenRoot: {fileID: 0}
-  mTargetName: rick_and_morty
+  mTargetName: spongebob
   mDatasetName: Vuforia/series_database.xml
   mCastedBehaviour: {fileID: 714370377}
   mMeshFilter: {fileID: 0}
@@ -5031,6 +5031,7 @@ GameObject:
   - component: {fileID: 1110779128}
   - component: {fileID: 1110779127}
   - component: {fileID: 1110779126}
+  - component: {fileID: 1110779132}
   m_Layer: 0
   m_Name: ARCamera
   m_TagString: MainCamera
@@ -5182,6 +5183,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1110779132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110779125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb0be2bb47394e2408cc6cd749d24361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AdaptiveFogController
+  brightnessThreshold: 0.4
+  fogDensityDark: 0.31
+  fogDensityBright: 0
+  smoothSpeed: 2
 --- !u!1 &1197218021
 GameObject:
   m_ObjectHideFlags: 0
