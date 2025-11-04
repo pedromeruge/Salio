@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("single_maze");
+        SceneManager.LoadScene("single_maze_easy");
     }
 
     public void LevelSelect()

@@ -5,7 +5,7 @@ using Vuforia;
 public class AdaptiveFogController : MonoBehaviour
 {
     public float brightnessThreshold = 0.4f;
-    public float fogDensityDark = 0.5f;
+    public float fogDensityDark = 0.3f;
     public float fogDensityBright = 0.0f;
     public float smoothSpeed = 2.0f;
 
@@ -80,7 +80,6 @@ public class AdaptiveFogController : MonoBehaviour
 
         // Try RGB888 first, fallback to GRAYSCALE
         Vuforia.Image image = VuforiaBehaviour.Instance.CameraDevice.GetCameraImage(PixelFormat.RGB888);
-        Debug.Log(image);
         if (image == null)
         {
             image = VuforiaBehaviour.Instance.CameraDevice.GetCameraImage(PixelFormat.GRAYSCALE);

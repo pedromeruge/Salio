@@ -3996,14 +3996,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30fc88a718be4ed0b83e73b7d04ca92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  ball: {fileID: 1758016028}
-  goal: {fileID: 690145022}
   messageText: {fileID: 1503299651}
   timerText: {fileID: 2106310730}
   startMessage: Level Start!
   endMessage: Level Complete!
+  loseMessage: Game Over!
   messageDisplayTime: 3
   currentLevel: 1
+  sceneToLoad: MainMenu
 --- !u!4 &1351581665
 Transform:
   m_ObjectHideFlags: 0
