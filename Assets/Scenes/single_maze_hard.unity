@@ -4009,7 +4009,7 @@ GameObject:
   - component: {fileID: 1758016034}
   m_Layer: 6
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4495,13 +4495,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: smiling_friends
+  mTrackableName: spongebob
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/series_database.xml
-  mAspectRatio: 1
+  mAspectRatio: 0.933333
   mImageTargetType: 0
   mWidth: 1
-  mHeight: 1
+  mHeight: 0.933333
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -4537,7 +4537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 2028883491}
   mHiddenRoot: {fileID: 0}
-  mTargetName: smiling_friends
+  mTargetName: spongebob
   mDatasetName: Vuforia/series_database.xml
   mCastedBehaviour: {fileID: 2028883491}
   mMeshFilter: {fileID: 0}
