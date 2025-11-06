@@ -21,7 +21,7 @@ public class LevelSelect : MonoBehaviour
 
     public void TransitionToLevelHard()
     {
-        SceneManager.LoadSceneAsync("single_maze");
+        SceneManager.LoadSceneAsync("single_maze_hard");
     }
 
     public void TransitionToLevelExtra()

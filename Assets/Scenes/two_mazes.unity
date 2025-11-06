@@ -1909,13 +1909,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: smiling_friends
+  mTrackableName: rick_and_morty
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/series_database.xml
-  mAspectRatio: 1
+  mAspectRatio: 1.004651
   mImageTargetType: 0
   mWidth: 1
-  mHeight: 1
+  mHeight: 1.004651
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -1969,7 +1969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 714370377}
   mHiddenRoot: {fileID: 0}
-  mTargetName: smiling_friends
+  mTargetName: rick_and_morty
   mDatasetName: Vuforia/series_database.xml
   mCastedBehaviour: {fileID: 714370377}
   mMeshFilter: {fileID: 0}
@@ -2183,13 +2183,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: rick_and_morty
+  mTrackableName: spongebob
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/series_database.xml
-  mAspectRatio: 1.004651
+  mAspectRatio: 0.933333
   mImageTargetType: 0
   mWidth: 1
-  mHeight: 1.004651
+  mHeight: 0.933333
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -2209,7 +2209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 719325105}
   mHiddenRoot: {fileID: 0}
-  mTargetName: rick_and_morty
+  mTargetName: spongebob
   mDatasetName: Vuforia/series_database.xml
   mCastedBehaviour: {fileID: 719325105}
   mMeshFilter: {fileID: 0}
@@ -3015,7 +3015,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 673588431}
@@ -3992,6 +3992,7 @@ MonoBehaviour:
   loseMessage: Game Over!
   messageDisplayTime: 3
   currentLevel: 1
+  startLevelTimer: 120
   sceneToLoad: MainMenu
 --- !u!4 &1351581665
 Transform:
@@ -4072,7 +4073,7 @@ GameObject:
   - component: {fileID: 1391818281}
   m_Layer: 8
   m_Name: Goal
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4086,7 +4087,7 @@ Transform:
   m_GameObject: {fileID: 1391818279}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -5.02, y: 0.29821423, z: -4.42}
+  m_LocalPosition: {x: -4.29, y: 0.29821423, z: -4.21}
   m_LocalScale: {x: 1.6071428, y: 0.3571428, z: 1.6071428}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4449,7 +4450,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1266339048}
@@ -6115,7 +6116,7 @@ GameObject:
   - component: {fileID: 2057979720}
   m_Layer: 8
   m_Name: Goal
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6129,7 +6130,7 @@ Transform:
   m_GameObject: {fileID: 2057979718}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -2.42, y: 0.239, z: -3.22}
+  m_LocalPosition: {x: -2.12, y: 0.239, z: -3.2}
   m_LocalScale: {x: 1.6071428, y: 0.3571428, z: 1.6071428}
   m_ConstrainProportionsScale: 0
   m_Children:

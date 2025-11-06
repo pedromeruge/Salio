@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/single_maze_medium.unity
     guid: f80be59a3bc0a7c498ca6ba88159f26b
   - enabled: 1
-    path: Assets/Scenes/single_maze.unity
+    path: Assets/Scenes/single_maze_hard.unity
     guid: 0526ddeaae3a14f798bd9b6b4f778e3a
   - enabled: 1
     path: Assets/Scenes/two_mazes.unity

@@ -9,8 +9,6 @@ public class VideoBackgroundReparenter : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool logReparent = true;
 
-    private bool reparented = false;
-
     private Camera mainCam; // cached main camera
     void Start()
     {
@@ -44,8 +42,6 @@ public class VideoBackgroundReparenter : MonoBehaviour
 
         // recurse to reparent any sub-children (if needed for the future)
         ReparentChildren(videoBg);
-
-        reparented = true;
 
         // match field of view to AR Camera
         mainCam.fieldOfView = ARCamera.fieldOfView;

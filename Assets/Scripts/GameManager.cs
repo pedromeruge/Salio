@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,8 +27,12 @@ public class GameManager : MonoBehaviour
 
     private bool levelRunning = false;
     private bool levelCompleted = false;
-    private float levelTimer = 60f;
+    private float levelTimer; // tracks current level timer
+    [SerializeField] private float startLevelTimer = 120f;
     [SerializeField] private string sceneToLoad;
+    private int goalsCount;
+    private HashSet<int> occupiedGoals;
+
 
     private void Awake()
     {
@@ -50,7 +56,17 @@ public class GameManager : MonoBehaviour
             timerText.gameObject.SetActive(true);
         }
 
-        startLevel();
+        //find all goals in the scene
+        findGoals();
+
+        startLevel(); // change this to on object detect, so it only starts counter when markers tracked
+    }
+
+    private void findGoals()
+    {
+        GameObject[] goalObjects = GameObject.FindGameObjectsWithTag("Goal");
+        goalsCount = goalObjects.Length;
+        occupiedGoals = new HashSet<int>();
     }
 
     private void Update()
@@ -83,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LevelStartRoutine()
     {
-        levelTimer = 60f;
+        levelTimer = startLevelTimer;
         levelCompleted = false;
         levelRunning = false;
 
@@ -99,7 +115,7 @@ public class GameManager : MonoBehaviour
         levelRunning = false;
         levelCompleted = true;
 
-        Debug.Log("Level " + currentLevel + " completed in " + Mathf.FloorToInt(60f - levelTimer) + " seconds!");
+        Debug.Log("Level " + currentLevel + " completed in " + Mathf.FloorToInt(startLevelTimer - levelTimer) + " seconds!");
         currentLevel++;
 
         StartCoroutine(LevelEndRoutine());
@@ -145,10 +161,33 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
     }
 
-    public void OnGoalReached()
+    public void OnGoalReached(int goalID)
     {
-        if (!levelCompleted) // avoid triggering end multiple times
-            endLevel();
+        Debug.Log("Goal " + goalID + " reached");
+        occupiedGoals.Add(goalID);
+        checkCompleteLeve();
+    }
+
+    public void OnGoalExited(int goalID)
+    {
+        Debug.Log("Goal " + goalID + " exited");
+        occupiedGoals.Remove(goalID);
+    }
+    
+    private void checkCompleteLeve()
+    {
+        Debug.Log("Got into check complete" + occupiedGoals.ToString());
+        // avoid triggering end multiple times
+        if (!levelCompleted)
+        {
+            Debug.Log("Got " + occupiedGoals.Count + "/" + goalsCount + " finished");
+            if (occupiedGoals.Count == goalsCount)
+            {
+                Debug.Log("All goals reached! Completing level...");
+                levelCompleted = true;
+                endLevel();
+            }
+        }
     }
 
     private IEnumerator Transition(string sceneName)
