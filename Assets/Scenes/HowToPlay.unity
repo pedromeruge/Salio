@@ -1136,8 +1136,7 @@ MonoBehaviour:
     the maze marker and the magnet marker.\n\nUse the magnet marker to guide the
     ball through the maze. \n\nPay attention to the timer, as if you don't reach
     the goal before it runs out the level will restart.\n\nEach maze has a different
-    magnet behavior, while the last maze changes has a twist on the defined gameplay
-    style.\n"
+    magnet behavior, while the last maze has a twist on the defined gameplay style.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
