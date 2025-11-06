@@ -1,14 +1,16 @@
 using UnityEngine;
 
+using UnityEngine;
+
 public class Goal : MonoBehaviour
 {
+    public int ballIndex;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance == null) return;
-
-        if (other.gameObject.tag == "Ball")
+        if (other.CompareTag("Player"))
         {
-            GameManager.Instance.OnGoalReached();
+            GameManager.Instance.OnBallReachedGoal(ballIndex);
         }
     }
 }
