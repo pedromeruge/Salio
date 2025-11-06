@@ -3261,7 +3261,7 @@ MonoBehaviour:
   messageDisplayTime: 3
   currentLevel: 1
   startLevelTimer: 120
-  sceneToLoad: single_maze
+  sceneToLoad: single_maze_hard
 --- !u!4 &1351581665
 Transform:
   m_ObjectHideFlags: 0
