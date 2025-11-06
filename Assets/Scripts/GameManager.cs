@@ -119,7 +119,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("Level failed! Timer reached zero.");
         yield return ShowMessage(loseMessage);
 
-        if (sceneToLoad == null) sceneToLoad = "MainMenu";
+        if (sceneToLoad == null)
+        {
+            sceneToLoad = "MainMenu";
+        }
+        else
+        {
+            sceneToLoad = SceneManager.GetActiveScene().name;
+        }
+        
         StartCoroutine(Transition(sceneToLoad));
     }
 

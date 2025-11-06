@@ -5,7 +5,7 @@ using Vuforia;
 public class AdaptiveFogController : MonoBehaviour
 {
     public float brightnessThreshold = 0.4f;
-    public float fogDensityDark = 0.3f;
+    public float fogDensityDark = 0.15f;
     public float fogDensityBright = 0.0f;
     public float smoothSpeed = 2.0f;
 

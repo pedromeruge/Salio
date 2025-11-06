@@ -5354,7 +5354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdaptiveFogController
   brightnessThreshold: 0.4
-  fogDensityDark: 0.3
+  fogDensityDark: 0.15
   fogDensityBright: 0
   smoothSpeed: 2
 --- !u!1 &1197218021
