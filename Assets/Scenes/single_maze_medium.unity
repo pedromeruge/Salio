@@ -3321,7 +3321,7 @@ MonoBehaviour:
   loseMessage: Game Over!
   messageDisplayTime: 3
   currentLevel: 1
-  startLevelTimer: 120
+  startLevelTimer: 60
   sceneToLoad: single_maze_hard
 --- !u!4 &1351581665
 Transform:
