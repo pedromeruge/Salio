@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +19,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Settings")]
     public float messageDisplayTime = 3f;
-    public bool twoBalls = false;
 
     public bool IsGamePaused { get; private set; } = false;
     public short currentLevel = 1;
@@ -27,9 +27,6 @@ public class GameManager : MonoBehaviour
     private bool levelCompleted = false;
     private float levelTimer = 60f;
     [SerializeField] private string sceneToLoad;
-
-    private bool ball1Reached = false;
-    private bool ball2Reached = false;
 
     private void Awake()
     {
@@ -90,9 +87,6 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         levelRunning = false;
 
-        ball1Reached = false;
-        ball2Reached = false;
-
         yield return ShowMessage(startMessage);
 
         levelRunning = true;
@@ -115,7 +109,7 @@ public class GameManager : MonoBehaviour
     {
         yield return ShowMessage(endMessage);
 
-        if (string.IsNullOrEmpty(sceneToLoad)) sceneToLoad = "MainMenu";
+        if (sceneToLoad == null) sceneToLoad = "MainMenu";
 
         StartCoroutine(Transition(sceneToLoad));
     }
@@ -125,7 +119,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Level failed! Timer reached zero.");
         yield return ShowMessage(loseMessage);
 
-        if (string.IsNullOrEmpty(sceneToLoad))
+        if (sceneToLoad == null)
         {
             sceneToLoad = "MainMenu";
         }
@@ -133,7 +127,7 @@ public class GameManager : MonoBehaviour
         {
             sceneToLoad = SceneManager.GetActiveScene().name;
         }
-
+        
         StartCoroutine(Transition(sceneToLoad));
     }
 
@@ -151,26 +145,10 @@ public class GameManager : MonoBehaviour
         messageText.gameObject.SetActive(false);
     }
 
-    public void OnBallReachedGoal(int ballIndex)
+    public void OnGoalReached()
     {
-        if (!levelRunning || levelCompleted) return;
-
-        if (!twoBalls)
-        {
+        if (!levelCompleted) // avoid triggering end multiple times
             endLevel();
-            return;
-        }
-
-        // Two-ball mode
-        if (ballIndex == 1) ball1Reached = true;
-        else if (ballIndex == 2) ball2Reached = true;
-
-        Debug.Log($"Ball {ballIndex} reached its goal.");
-
-        if (ball1Reached && ball2Reached)
-        {
-            endLevel();
-        }
     }
 
     private IEnumerator Transition(string sceneName)

@@ -3130,7 +3130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a14988307f35142b72c5d25c667349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Goal
-  ballIndex: 1
 --- !u!1 &692336668
 GameObject:
   m_ObjectHideFlags: 0
@@ -4785,7 +4784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a14988307f35142b72c5d25c667349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Goal
-  ballIndex: 0
 --- !u!65 &1039370842
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5021,7 +5019,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a14988307f35142b72c5d25c667349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Goal
-  ballIndex: 0
 --- !u!65 &1097701070
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5822,7 +5819,6 @@ MonoBehaviour:
   endMessage: Level Complete!
   loseMessage: Game Over!
   messageDisplayTime: 3
-  twoBalls: 0
   currentLevel: 1
   sceneToLoad: single_maze_medium
 --- !u!4 &1351581665
@@ -6201,7 +6197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a14988307f35142b72c5d25c667349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Goal
-  ballIndex: 0
 --- !u!65 &1514878151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7807,7 +7802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a14988307f35142b72c5d25c667349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Goal
-  ballIndex: 0
 --- !u!65 &1876855173
 BoxCollider:
   m_ObjectHideFlags: 0
