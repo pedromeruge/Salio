@@ -1,6 +1,7 @@
 # 📖 Overview
 
-![Salio Cover Art](repo_description/cover_art.png)
+*Salio Demo (click to open)*
+[![Salio Cover Art](repo_description/cover_art.png)](repo_description/salio_demo.mp4)
 
 **Salio** is an augmented reality puzzle game developed in Unity, where the player guides a ball through physical mazes using printed markers and magnetic forces. The game combines **marker-based AR interaction, physics-based gameplay, and environmental conditions** to create different challenges across four levels.
 
